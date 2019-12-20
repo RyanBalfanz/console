@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  traefik:
+    # The official v2.0 Traefik docker image
+    image: traefik:v2
+    # Enables the web UI and tells Traefik to listen to docker
+    command: --api.insecure=true --providers.docker
+    ports:
+      # The HTTP port
+      - "80:80"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      - ./traefik.toml:/traefik.toml
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  whoami:
+    image: containous/whoami:v1.4.0
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
+
+  portainer:
+    image: portainer/portainer:1.23.0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    labels:
+      - "traefik.port=9000"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.docker.localhost`)"
+
+  pgadmin4:
+    image: dpage/pgadmin4:4.16
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=postgres
+      - PGADMIN_DEFAULT_PASSWORD=postgres
+    volumes:
+      - pgadmin4_data:/var/lib/pgadmin
+    labels:
+      - "traefik.http.routers.pgadmin4.rule=Host(`pgadmin4.docker.localhost`)"
+
+volumes:
+  portainer_data:
+  pgadmin4_data:
