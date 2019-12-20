@@ -3,7 +3,7 @@ version: '3'
 services:
   traefik:
     # The official v2.0 Traefik docker image
-    image: traefik:v2
+    image: traefik:v2.1.1
     # Enables the web UI and tells Traefik to listen to docker
     command: --api.insecure=true --providers.docker
     ports:
