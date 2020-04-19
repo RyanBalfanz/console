@@ -39,6 +39,7 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=postgres
     volumes:
       - pgadmin4_data:/var/lib/pgadmin
+      - ./pgadmin4/servers.json:/pgadmin4/servers.json
     labels:
       - "traefik.http.routers.pgadmin4.rule=Host(`pgadmin4.docker.localhost`)"
 

@@ -1,0 +1,14 @@
+{
+    "Servers": {
+        "1": {
+            "Name": "PostgreSQL",
+            "Group": "Local (Host)",
+            "Port": 5432,
+            "Username": "postgres",
+            "Host": "host.docker.internal",
+            "SSLMode": "prefer",
+            "MaintenanceDB": "postgres",
+            "Comment": "This server connects from the container to a PostgreSQL service on the host."
+        }
+    }
+}
