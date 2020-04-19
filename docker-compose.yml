@@ -21,7 +21,6 @@ services:
   whoami:
     image: containous/whoami:v1.4.0
     labels:
-      - "traefik.enable=true"
       - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
 
   portainer:
