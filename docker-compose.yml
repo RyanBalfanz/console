@@ -34,7 +34,7 @@ services:
       - "traefik.http.routers.portainer.rule=Host(`portainer.docker.localhost`)"
 
   pgadmin4:
-    image: dpage/pgadmin4:4.16
+    image: dpage/pgadmin4:4.20
     environment:
       - PGADMIN_DEFAULT_EMAIL=postgres
       - PGADMIN_DEFAULT_PASSWORD=postgres
